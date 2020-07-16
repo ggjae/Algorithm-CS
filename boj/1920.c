@@ -1,67 +1,54 @@
 #include <stdio.h>
-void quick_sort(int *data, int start, int end){
-    if(start >= end){ // 원소가 1개인 경우 
-    return; 
-    } 
-    int pivot = start; 
-    int i = pivot + 1; // 왼쪽 출발 지점 
-    int j = end; // 오른쪽 출발 지점 
-    int temp; 
-    while(i <= j){ // 포인터가 엇갈릴때까지 반복 
-        while(i <= end && data[i] <= data[pivot]){
-            i++; 
-        } while(j > start && data[j] >= data[pivot]){
-            j--;
-        } 
-        if(i > j){// 엇갈림 
-            temp = data[j];
-            data[j] = data[pivot];
-            data[pivot] = temp;
-        }else{ // i번째와 j번째를 스왑
-            temp = data[i];
-            data[i] = data[j];
-            data[j] = temp;
-        } 
-    } // 분할 계산 
-    quick_sort(data, start, j - 1);
-    quick_sort(data, j + 1, end); 
+#include <stdlib.h>
+#include <string.h>
+
+int compare(const void *a, const void *b)    // 오름차순 비교 함수 구현
+{
+    int num1 = *(int *)a;    // void 포인터를 int 포인터로 변환한 뒤 역참조하여 값을 가져옴
+    int num2 = *(int *)b;    // void 포인터를 int 포인터로 변환한 뒤 역참조하여 값을 가져옴
+
+    if (num1 < num2)    // a가 b보다 작을 때는
+        return -1;      // -1 반환
+    
+    if (num1 > num2)    // a가 b보다 클 때는
+        return 1;       // 1 반환
+    
+    return 0;    // a와 b가 같을 때는 0 반환
 }
 int main(){
-    int acount[100001];
-    int bcount[100001];
-    int a,b,k;
-    int startindex,endindex;
-    scanf("%d",&a);
-    for(k=0;k<a;k++){
-        scanf("%d",&acount[k]);
-        printf("acount[%d] = %d\n",k,acount[k]);
-    } // a번 만큼 입력받고
-    scanf("%d",&b);
-    for(k=0;k<b;k++){
-        scanf("%d",&bcount[k]);
-        printf("bcount[%d] = %d\n",k,bcount[k]);
-    } // b번 만큼 입력 바다
-    printf("%d",bcount[b-1]);
-    // quick_sort(acount,0,a-1); // a번 받은거 소팅
-    startindex = 0;
-    printf("너뭐해??%d",startindex);
-    endindex = a-1; // acount를 소팅한것에서 찾을거야.
-    int mid;
-    for(k=0;k<b;k++){
-        while(1){
-            mid = (startindex + endindex) / 2;
-            if(acount[mid] < bcount[k]){
-                startindex = mid + 1;
-            } else if (acount[mid] > bcount[k]){
-                endindex = mid - 1;
-            } else if (acount[mid] == bcount[k]) {
-                printf("1");
-                break;
+    int n,m,mid;
+    int count = 1;
+    int sumcount = 0;
+    int start;
+    int end;
+    scanf("%d",&n);
+    int *a = malloc(sizeof(int) * n);
+    for(int i = 0;i<n;i++){
+        scanf("%d",&a[i]);
+    }
+    scanf("%d",&m);
+    int *b = malloc(sizeof(int) * m);
+    for(int i =0;i<m;i++){
+        scanf("%d",&b[i]);
+    }
+    qsort(a, n, sizeof(int), compare);
+    for(int i=0;i<m;i++){
+        start = 0;
+        end = n-sumcount;
+        while (start <= end){
+            mid = (start + end)/2;
+            if (b[i] == a[mid]){ printf("1\n"); break;}
+            else if(b[i] < a[mid]){
+                end = mid - 1;
             } else {
-                printf("0");
-                break;
+                start = mid + 1;
             }
+        } if (start > end && i != m-1) {
+            printf("0\n");
+        } else if (start > end && i == m-1){
+            printf("0\n");
         }
+        
     }
     return 0;
 }
