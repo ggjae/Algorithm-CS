@@ -1,0 +1,22 @@
+{
+    "window.zoomLevel": -2,
+    "workbench.editorAssociations": [],
+    "python.pythonPath": "C:\\Users\\jaeyong\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe",
+    "workbench.colorTheme": "Material Theme Palenight High Contrast",
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.formatOnSave": true,
+    "launch": {
+
+
+    
+        "configurations": [],
+        "compounds": []
+    },
+    "[json]": {
+    
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.suggest.insertMode": "replace"
+    }
+}
