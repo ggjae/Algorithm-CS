@@ -24,7 +24,7 @@ void dijkstra(int start){
             if(cost < d[graph[now][i].first]){
                 d[graph[now][i].first] = cost;
                 pq.push(make_pair(-cost, graph[now][i].first));
-                printf("now : %d, cost: %d",now, cost);
+                printf("now : %d, cost: %d\n",now, cost);
             }
         }
     }
@@ -36,7 +36,9 @@ int main(){
         int a,b;
         cin >> a >> b;
         graph[a].push_back(make_pair(b,1));
+        graph[b].push_back(make_pair(a,1));
     }
+
     cin >> x >> k;
 
     fill_n(d, 101, INF);
