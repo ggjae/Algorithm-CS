@@ -6,6 +6,7 @@ using namespace std;
 int main(){
     int n,m; // 101개를 INF로 초기화시킨 벡터로 그래프를 초기화.
     vector<vector<int> > graph(101,vector<int>(101,INF));
+    // 101개의 배열인데 INF로 초기화되어있는 벡터.
     cin >> n >> m;
     for(int i=1;i<=n;i++){
         graph[i][i] = 0;
