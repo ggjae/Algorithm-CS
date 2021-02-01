@@ -41,16 +41,15 @@ int main(void) {
         int a, b, cost;
         cin >> a >> b >> cost;
         edges.push_back(make_pair(cost,make_pair(a,b)));
-        sort(edges.begin(),edges.end());
-
-        for(int i=0;i<edges.size();i++){
-            int cost = edges[i].first;
-            int a = edges[i].second.first;
-            int b = edges[i].second.second;
-            if(findParent(a) != findParent(b)){
-                unionParent(a, b);
-                result += cost;
-            }
+    }
+    sort(edges.begin(),edges.end());
+    for(int i=0;i<edges.size();i++){
+        int cost = edges[i].first;
+        int a = edges[i].second.first;
+        int b = edges[i].second.second;
+        if(findParent(a) != findParent(b)){
+            unionParent(a, b);
+            result += cost;
         }
     }
 }
