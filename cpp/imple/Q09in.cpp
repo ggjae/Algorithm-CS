@@ -13,7 +13,7 @@ int main(){
         string prev = s.substr(0,i);
         int cnt = 1;
         for(int j=i;j<s.size();j+=i){
-            if(prev == s.substr(j, i)) cnt += 1;
+            if(prev == s.substr(j, i)) cnt += 1; // j부터 i만큼
             else {
                 compressed += (cnt >= 2) ? to_string(cnt) + prev : prev;
                 prev = s.substr(j,i);
