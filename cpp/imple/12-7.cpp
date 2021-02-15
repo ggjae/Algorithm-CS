@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 int n, m;
@@ -58,4 +60,5 @@ int main(void) {
     } while(next_permutation(binary.begin(), binary.end()));
 
     cout << result << '\n';
+    return 0;
 }
