@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "deque": "cpp",
+        "initializer_list": "cpp",
+        "list": "cpp",
+        "vector": "cpp",
+        "xhash": "cpp",
+        "xstring": "cpp",
+        "xutility": "cpp",
+        "xstddef": "cpp",
+        "iostream": "cpp",
+        "ostream": "cpp"
+    }
+}
