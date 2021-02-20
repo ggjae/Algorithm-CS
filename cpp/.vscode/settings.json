@@ -9,6 +9,7 @@
         "xutility": "cpp",
         "xstddef": "cpp",
         "iostream": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "utility": "cpp"
     }
 }
