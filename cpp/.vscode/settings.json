@@ -10,6 +10,8 @@
         "xstddef": "cpp",
         "iostream": "cpp",
         "ostream": "cpp",
-        "utility": "cpp"
-    }
+        "utility": "cpp",
+        "queue": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }
