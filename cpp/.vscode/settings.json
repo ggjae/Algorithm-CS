@@ -11,7 +11,8 @@
         "iostream": "cpp",
         "ostream": "cpp",
         "utility": "cpp",
-        "queue": "cpp"
+        "queue": "cpp",
+        "iterator": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
