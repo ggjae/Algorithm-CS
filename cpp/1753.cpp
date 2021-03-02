@@ -1,17 +1,18 @@
 #include <iostream>
-#define INF 1e9
-
+#include <vector>
+#include <queue>
+#define INF 987654321
 using namespace std;
-int n,m,start;
-vector<pair<int, int> > graph[100001];
-int d[100001];
-
+int v,e,k;
+vector<pair<int, int> > graph[20001];
+// int check[20001];
+int d[20001];
 void dijkstra(int start){
     priority_queue<pair<int, int> > pq;
     pq.push(make_pair(0, start));
     d[start] = 0;
     while(!pq.empty()){
-        int dist = -pq.top().first; // c++에서 최대힙으로 priority queue를 구성하기 때문에
+        int dist = -pq.top().first;
         int now = pq.top().second;
         pq.pop();
         if(d[now] < dist) continue;
@@ -25,12 +26,20 @@ void dijkstra(int start){
     }
 }
 int main(){
-    cin >> n >> m >> start;
-    for (int i=0;i<m;i++){
-        int a,b,c;
-        cin >> a >> b >> c;
-        graph[a].push_back(make_pair(b,c));
+    cin >> v >> e;
+    cin >> k;
+    for(int i=0;i<e;i++){
+        int tmp1, tmp2, tmp3;
+        cin >> tmp1 >> tmp2 >> tmp3;
+        graph[tmp1].push_back({tmp2,tmp3});
     }
-    fill_n(d, 100001, INF);
-    dijkstra(start);
+    for(int i=1;i<=v;i++) d[i] = INF;
+    dijkstra(k);
+    for (int i = 1; i <= v; i++) {
+		if (d[i] == INF)
+			printf("INF\n");
+		else
+			printf("%d\n", d[i]);
+	}
+    return 0;
 }
