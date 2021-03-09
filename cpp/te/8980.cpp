@@ -26,9 +26,7 @@ int main(){
         box.push_back(make_pair(make_pair(tmp2,tmp1), tmp3)); // 받는거부터 골라놓음
     }
     sort(box.begin(),box.end(),compare);
-    for(int i=0;i<m;++i){ // 생각한 알고리즘은 end가 빠른친구먼저 계산해주고 truck에
-    // 탑승이 가능하다면 바로 태움. 그러고 내가 이걸 들고있던 때의 truck 값을
-    // 늘려주면서 못태울수도있고 태울수도 있고 함.
+    for(int i=0;i<m;++i){ // 
         nowbox = 0;
         start = box[i].first.second;
         end = box[i].first.first;
@@ -36,7 +34,6 @@ int main(){
         for(int j=start;j<end;j++){
             // printf("truck[j] : %d\n",truck[j]);
             nowbox = max(nowbox, truck[j]);
-            
         }
         nowbox = min(c-nowbox, cap);
         // printf("나우박스 : %d\n",nowbox);
