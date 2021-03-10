@@ -7,6 +7,9 @@
 # on a.animal_id = b.animal_id
 # order by 1,2
 # -- out나간애들있고 in들어온애 없음
+
+없어진 기록 찾기 문제.
+
 select a.animal_id, a.name
 from animal_outs a
 where a.animal_id not in (select b.animal_id from animal_ins b)
