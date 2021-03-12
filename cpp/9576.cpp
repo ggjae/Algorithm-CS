@@ -24,11 +24,12 @@ int main(){
         //     q.pop();
         //     q.push()
         // }
-        
         for(int i=0;i<m;i++){
+            // printf("왜 이렇게 나오는걸까? %d 부터 %d까지...\n",a[i].second,a[i].first);
             for(int j=a[i].second;j<=a[i].first;j++){
                 if(!check[j]){
                     check[j] = true;
+                    // printf("%d번째 사용할게요.\n",j);
                     break;
                 }
             }
