@@ -22,11 +22,11 @@ int BFS(){
             int nx = x + dx[i];
             int ny = y + dy[i];
             if(nx < 0 || nx>=n || ny <0 || ny>=m) continue;
-            if(mat[nx][ny] == 1 && w == 1){
-                visit[nx][ny][1] = true;
+            if(mat[nx][ny] == 1 && w == 1){ // [0]인 경우에는 아무때나 막 움직일 수 있나?
+                visit[nx][ny][w] = true; // 그래서 [1]일 때 체크를 해줘서 벽을 부쉈는지 체크하는
                 q.push({{nx,ny}, {w-1,cnt+1}});
             } if(mat[nx][ny] == 0 && !visit[nx][ny][w]){
-                visit[nx][ny][1] = true;
+                visit[nx][ny][w] = true;
                 q.push({{nx, ny}, {w,cnt+1}});
             }
         }
