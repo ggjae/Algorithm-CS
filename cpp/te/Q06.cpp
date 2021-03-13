@@ -11,7 +11,10 @@ int main(){
         int tmp1;
         cin >> tmp1;
         food_times.push_back({i, tmp1});
-        pq.push(-tmp1,i);
+        pq.push({-tmp1,i}); // 시간, 인덱스
+    }
+    while(k > -pq.top().first){
+        
     }
     
     return 0;

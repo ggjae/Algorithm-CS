@@ -3,6 +3,12 @@
 #include <queue>
 #include <algorithm>
 using namespace std;
+bool compare(const pair<int, int> &a, const pair<int, int> &b){
+    if(a.first == b.first){
+        return a.second > b.second;
+    }
+    return a.first < b.first;
+}
 int main(){
     int t;
     int n,m;
@@ -26,7 +32,7 @@ int main(){
         // }
         for(int i=0;i<m;i++){
             // printf("왜 이렇게 나오는걸까? %d 부터 %d까지...\n",a[i].second,a[i].first);
-            for(int j=a[i].second;j<=a[i].first;j++){
+            for(int j=a[i].first;j>=a[i].second;j--){
                 if(!check[j]){
                     check[j] = true;
                     // printf("%d번째 사용할게요.\n",j);
