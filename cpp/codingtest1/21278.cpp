@@ -13,7 +13,7 @@ int main(){
     for(int i = 1; i<=M; i++) {
         int a,b;
         cin>>a>>b;
-        arr[a][b] = arr[b][a] = 1;
+        arr[a][b] = arr[b][a] = 1; // 양방향
     }
     
     
@@ -22,7 +22,7 @@ int main(){
             for(int j = 1; j<=N; j ++ ) {
                 if (i == j) arr[i][j] = 0;
                 arr[i][j] = min(arr[i][j], arr[i][k]+arr[k][j]);
-            }
+            } // 플로이드 워셜
         }
     }
     int tempt = 0;
