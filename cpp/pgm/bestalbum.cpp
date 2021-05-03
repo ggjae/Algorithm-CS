@@ -1,70 +1,65 @@
-#include <iostream>
 #include <string>
-#include <cstring>
 #include <vector>
 #include <map>
 #include <algorithm>
-using namespace std;
 
+using namespace std;
+bool cmp(pair<int,int> v1,pair<int,int> v2)
+{
+    if(v1.first > v2.first) return true;
+    else if(v1.first == v2.first){
+        return v1.second < v2.second;
+    }
+    return false;
+}
 vector<int> solution(vector<string> genres, vector<int> plays) {
-    // vector<int> answer;
-    // vector<pair<pair<string, int>, int> > v;
-    // 
-    // map<int, string>::iterator iter;
-    // map<int, string> m; // 모든 장르는 재생된 횟수가 다르다는데?
-    // // 오름차순 정렬이 자동으로 됨
-    // for(int i=0;i<genres.size();i++){
-    //     v.push_back(make_pair(make_pair(genres[i], plays[i]),0));
-    // }
-    // int sumplay = 0;
-    // for(int i=0;i<v.size();i++){
-    //     string nowgen = v[i].first.first;
-    //     int play = v[i].first.second;
-    //     sumplay += play;
-    //     for(int j=i+1;j<v.size();j++){
-    //         if(nowgen == v[j].first.first && v[j].second == 0){
-    //             v[j].second = 1;
-    //             sumplay += v[j].first.second;
-    //         }
-    //     }
-    //     m.insert(make_pair(-sumplay,nowgen));
-    // }
     vector<int> answer;
-    map<string, int> mp;
-    pair<int, int> arr[10001];
-    map<string, int>::iterator it;
-    for(int i=0; i<(int)genres.size(); i++){
-        it = mp.find(genres[i]);
-        if(it != mp.end()){
-            int pre = it->second;
-            mp[genres[i]] = pre+plays[i];
-        }else{
-            mp.insert({genres[i], plays[i]});
+    map<string,int> genre;
+    vector<string> list;
+    for(int i=0; i<genres.size(); i++){ //장르별 노래 재생횟수의 합
+        if(genre[genres[i]] == 0){
+            genre[genres[i]] += plays[i];
+            list.push_back(genres[i]);
         }
+        else
+            genre[genres[i]] += plays[i];
     }
-    map<int, string> rev;
-    map<int, string>::iterator iter;
-    for(it = mp.begin(); it != mp.end(); it++){
-        rev.insert({-(it->second), it->first});
+
+    int first = 0; string first_name;
+    for(int i=0; i<list.size(); i++){
+        if(genre[list[i]] > first){
+            first = genre[list[i]];
+            first_name = list[i];
+        }
+    } //가장 많이 들은 장르 알아내기
+    genre[first_name] = 0; //가장 많이 들은 장르 배제
+    int second = 0; string second_name;
+    for(int i=0; i<list.size(); i++){
+        if(genre[list[i]] > second){
+            second = genre[list[i]];
+            second_name = list[i];
+        }
+    } //두번째로 많이 들은 장르 알아내기
+    vector<pair<int,int>> first_genre; //가장 많이 들은 장르의 index별 들은 횟수 저장
+    vector<pair<int,int>> second_genre; //두번째로 많이 들은 장르의 index별 들은 횟수 저장
+
+    int first_count = 0; int second_count = 0;
+    for(int i=0; i<genres.size(); i++){
+        if(genres[i] == first_name) {first_genre.push_back(make_pair(plays[i],i));
+                                    first_count++;}
+        if(genres[i] == second_name) {second_genre.push_back(make_pair(plays[i],i));
+                second_count++;}
     }
-    
-    for(iter=rev.begin();iter!=rev.end();iter++){
-        // printf("%s : %d\n",iter->second, -iter->first);
-        string gen = iter->second;
-        int idx = 0;
-        memset(arr,0,sizeof(arr));
-        for(int i=0;i<(int)genres.size();i++){
-            if(gen.compare(genres[i]) == 0){
-                arr[idx++] = {-plays[i],i};
-            }
-        }
-        sort(arr, arr+idx);
-        if(idx == 1){
-            answer.push_back(arr[0].second);
-        } else {
-            answer.push_back(arr[0].second);
-            answer.push_back(arr[1].second);
-        }
+    sort(first_genre.begin(),first_genre.end(),cmp);
+    sort(second_genre.begin(),second_genre.end(),cmp);
+
+    for(int i=0; i<first_genre.size(); i++){
+        if(i == 2) break;
+        answer.push_back(first_genre[i].second);
+    }
+    for(int i=0; i<second_genre.size(); i++){
+        if(i == 2) break;
+        answer.push_back(second_genre[i].second);
     }
     return answer;
 }
