@@ -25,13 +25,12 @@ int solution(vector<int> priorities, int location) {
         }
     }
     for(int i=0;i<v.size();i++){
-        printf("v[i]:%d\n",v[i]);
-        // if(location == v[i]){
-        //     answer = i;
-        //     break;
-        // }
+        if(location == v[i]){
+            answer = i;
+            break;
+        }
     }
-    return answer;
+    return answer+1;
 }
 int main(){
     solution({2,1,3,2},2);
