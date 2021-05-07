@@ -9,6 +9,7 @@
         "limits": "cpp",
         "cstring": "cpp",
         "list": "cpp",
-        "unordered_map": "cpp"
+        "unordered_map": "cpp",
+        "xstddef": "cpp"
     }
 }
