@@ -11,6 +11,7 @@ int main(){
         cin >> a;
         hbg.push_back(a);
     }
-    sort(hbg.begin(),hbg.end());
+    
+
     return 0;
 }

@@ -7,9 +7,6 @@ int main() {
     int N, M, K;
     vector<int> chulCard, minCard, result;
 
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-
     cin >> N >> M >> K;
     
     minCard.resize(M);
