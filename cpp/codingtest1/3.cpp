@@ -2,83 +2,40 @@
 #include <vector>
 #include <stack>
 #include <iostream>
+#include <set>
 using namespace std;
 
 string solution(int n, int k, vector<string> cmd) {
     string answer = "";
-    // vector<pair<int, int> > s1;
-    // for(int i=0;i<n;i++){
-    //     s1.push_back({i,i+1}); // {0,1} , {1,2};
-    // }
-    vector<int> vs;
-    vector<int> v;
-    for(int i=0;i<n;i++){
-        vs.push_back(i);
-        v.push_back(i);
-    }
-    stack<int> d;
-    for(int i=0;i<cmd.size();i++){
-        for(int j=0;j<cmd[i].size();j++){
-            // printf("k : %d cmd : %c\n",k,cmd[i][j]);
-            if(cmd[i][j] == 'U'){
-                int x = cmd[i][cmd[j].size()-1] - '0';
-                int xcnt = 0;
-                while(x != xcnt && k > 0){
-                    k--;
-                    if(vs[k] == -1){
-                        continue;
-                    } else {
-                        xcnt++;
-                    }
-                }
-                break;
-            } else if(cmd[i][j] == 'D'){
-                int x = cmd[i][cmd[j].size()-1] - '0';
-                int xcnt = 0;
-                while(x != xcnt && k < n){
-                    k++;
-                    if(vs[k] == -1){
-                        continue;
-                    } else{
-                        xcnt++;
-                    }
-                }
-                break;
-            } else if(cmd[i][j] == 'C'){
-                vs[k] = -1;
-                d.push(k);
-                int temp = k;
-                while(vs[k] == -1 && k < n){
-                    k++;
-                    if(k == n){
-                        k = temp;
-                        break;
-                    }
-                }
-                while(vs[k] == -1 && k > 0){
-                    k--;
-                }
-                
-            } else if(cmd[i][j] == 'Z'){
-                int ne = d.top();
-                d.pop();
-                vs[ne] = ne;
-            }
-        }
-    }
-
-    for(int i=0;i<vs.size();i++){
-        if(vs[i] != v[i]){
-            answer.append("X");   
+    set<int> s;
+    stack<int> st;
+    for(int i=0;i<n;i++) s.insert(i);
+    auto it = s.find(k);
+    for (const auto &str : cmd){
+        if(str == "C"){
+            auto nxt = next(it);
+            st.push(*it);
+            s.erase(it);
+            it = nxt;
+            printf("%d\n",*s.end());
+            if(it == s.end()) --it;
+        } else if (str == "Z"){
+            int top = st.top();
+            st.pop();
+            s.insert(top);
         } else {
-            answer.append("O");
+            int d = stoi(str.substr(2));
+            if(str[0] == 'U') d *= -1;
+            it = next(it,d);
         }
     }
-    return answer;
+    string ans(n, 'X');
+    for (const auto &i : s) ans[i] = 'O'; // set에 있는 것들 하나씩 i에 넣는 느낌.
+    return ans;
 }
 int main(){
     cout << solution(8, 2, {"D 2", "C", "U 3", "C", "D 4", "C", "U 2", "Z", "Z"}) << endl;
     cout << solution(8,2,{"D 2","C","U 3","C","D 4","C","U 2","Z","Z","U 1","C"}) << endl;
-    cout << solution(8,2,{"D 2","C","U 3","C","D 4","C","U 2","Z","Z","U 1","C","C","C","C","C"}) << endl;
+    cout << solution(8,2,{"D 2","C","U 3","C","D 4","C","U 2","Z","Z","U 1","C","C","C","C","C","C"}) << endl;
     return 0;
 }
