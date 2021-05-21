@@ -13,7 +13,7 @@ int minCache[MAX][MAX];
 void initialize(void){
     for (int i = 0; i < MAX; i++) {
         for (int j = 0; j < MAX; j++) {
-            maxCache[i][j] = INT_MIN;
+            maxCache[i][j] = INT_MIN;sjrk
             minCache[i][j] = INT_MAX;
         } 
     }

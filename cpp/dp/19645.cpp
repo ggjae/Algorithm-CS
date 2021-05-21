@@ -4,6 +4,7 @@
 using namespace std;
 int main(){
     int n;
+    bool dp[2510][2510];
     cin >> n;
     vector<int> hbg;
     for(int i=0;i<n;i++){
