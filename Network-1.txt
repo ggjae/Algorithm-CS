@@ -1,0 +1,47 @@
+Network
+OSI 7 layer => 개방형 시스템 상호 연결을 위한 기초 참조 계층형 모델
+현재는 TCP/IP 4 layer라고 불리는 계층 모델이 기반이 됨
+
+어떻게 계층구조로 만들게 되었을까?
+=>한 시스템과 다른 시스템이 통신하기에는 다양한 규칙과 장비들을 필요로 하고
+이를 위한 복잡한 시스템이 필요하다.
+=> 계층별로 제공하는 서비스를 나눠 구현을 조금이나마 유연하게 가져갈 수 있다.
+계층구조의 장점은 서비스를 계층별로 나누어 특정 부분에 대한 논의도 편함
+
+프로토콜 : 메세지를 주고 받는 양식, 통신 규약
+
+1. physical layer => DSL, ISDN
+2. Datalink layer => frame => PPP, Ethernet, Wifi
+3. Network Layer => datagram, packet => IP, ICMP, ARP
+4. Transport layer => segment => TCP, UDP, SCTP
+5. Session Layer => message => NetBIOS, TLS
+6. Presentation Layer => message => ASCII MPEG
+7. Application Layer => message => HTTP, SMTP, FTP, SIP
+
+1계층 - 각 비트를 한 노드에서 다음 노드로 실제로 이동하는 계층
+전송 매체에 의존한다.
+2계층 - 홉투홉, 노드투노드 => 맥주소를 얻게 되는데, 물리적으로 할당하여
+변할 수 없는 고유의 값이다.
+3계층 - 한 호스트에서 다른 호스트로 => 하지만 end to end는 아님.
+IP 프로토콜의 핵심은 forwarding, routing이다. fragmentation이 일어날 수 있음
+4계층 - TCP, UDP로 end-to-end 전송의 최하위계층
+Segmentation이 일어날 수 있고, MTU에 따라 크기가 나눠지는 부분이 4계층
+
+5,6은 스킵
+7계층 - 통신의 최종 목적지로 응용 프로그램과 밀접한 관계를 가지는 것이 많다.
+
+데이터 전송의 흐름
+=> 최초 전송하고자 하는 데이터에 응용계층 헤더를 붙이고
+하위계층으로 넘어가면서 계속 헤더를붙이면서 완성된 비트들이 물리 계층을 통하여
+전송된다.
+
+URI : Uniform Resource Identifier
+=> 인터넷에서 자원을 식별하기 위한 문자열. URI의 하위 개념으로 URL, URN
+ex) https://test.com/company/location
+
+
+URL : Uniform Resource Locator
+=> 웹에서 자원의 위치를 나타낸다. 특정 서버의 한 리소스에 대해 구체적인 위치 표현
+
+URN : 리소스의 위치에 영향을 받지 않는 고유한 이름 역할
+표준이 되지 않아서 접할 기회가 별로 없다.
