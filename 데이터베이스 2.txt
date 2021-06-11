@@ -1,0 +1,78 @@
+데이터베이스 2
+
+Join
+두 개 이상의 테이블을 연결 또는 결합하여 데이터를 출력하는 것
+조인을 사용하는 이유는 정규화로 인해 분리된 테이블에서 필요한 데이터를 얻으려고
+INNER JOIN -> 공통 속성을 가진 튜플들을 보여줌
+EQUAL JOIN이라고 하기도 함.
+ex) select * from employee, department where employee.departmentID = department.departmentID
+
+inner join을 사용하려면 on과 using 중에 조건절을 필수적으로 사용해야 함
+
+using => 원하는 컬럼에 대해서만 선택적 equal join
+on => 컬럼명이 다르더라도 join조건 사용 가능
+
+기준이 되는 테이블이 드라이빙 테이블이 됩니다.
+드라이빙 테이블 ? => JOIN이 발생했을 때 첫번째로 ACCESS 되는 테이블
+LEFT OUTER JOIN => 왼쪽 테이블을 기준으로 데이터 출력
+
+RIGHT OUTER JOIN => 오른쪽 테이블을 기준으로 데이터 출력
+
+FULL OUTER JOIN => LEFT, RIGHT 2개의 결과를 합쳐서 출력
+
+DDL => 데이터 정의어 - 데이터베이스를 정의하는 언어
+데이터 생성, 수정, 삭제 등 데이터의 골격을 결정한다.
+
+Data Definition Language라고 하고 create, alter, drop, truncate
+등이 있다
+
+DML => Data Manipulation Language
+정의된 데이터베이스에 입력된 레코드를 조회, 수정, 삭제할 때 사용
+select, insert, update, delete
+
+DCL => Data Control Language
+데이터베이스에 접근하거나 객체에 권한을 줄 때
+데이터를 제어하는 언어
+grant, revoke, commit, rollback
+
+트랜잭션 : 데이터베이스의 상태를 변환시키는 하나의 기능을 수행하기 위한 논리적 단위
+쿼리가 수행될 때 => 중단이 됐을 경우 rollback, 작업을 마치면 commit
+
+ACID => 안전하게 수행을 보장, 동시성제어 및 회복 기법 활용
+
+atomicity => 원자성, 완전히 수행되거나 전혀 수행되지 않아야 함
+consistency => 일관성, 일관된 상태에서 또 다른 일관된 상태로 가야 함
+Isolation => 고립성, 독립적으로 트랜잭션이 실행되어야 함
+durability => 지속성, 성공적으로 완료되면 영구적으로 반영되어야 함
+
+동시성제어 -> 락 기법, 회복 기법 -> 롤백, 백업
+
+트랜잭션 격리 수준 ? => ACID중 Isolation에 대하여 성능 관련 문제로 인해
+유연하게 조절할 수 있도록 격리 수준을 구분해 놓은 것
+
+격리 수준을 높이면? => 성능 저하, 일관성이 보장
+
+Isolation Level 0 => 1 => 2 => 3 격리 수준임
+
+동시성 제어로 발생하는 문제 갱신 손실 : lost update
+하나의 트랜잭션이 갱신한 내용을 commit / rollback 하기 전에
+다른 트랜잭션이 접근해 덮어씀으로써 갱신했던 내용이 사라짐
+
+read uncommitted부터 갱신 손실이 일어나지 않음.
+
+ex) 사용자 1이 X를 읽었을 떄 10이였음. X = X - 5 하고
+write_item(X)를 하기전에 사용자 2가 X를 읽어서
+X = X+5를 하면 X는 다시 10이어야 하는데, 15가 됨.
+
+오손 읽기(dirty read)
+=> 무효가 된 데이터를 읽은 것. 업데이트 되어야 되는데 rollback 해버린 것
+=> level 1 부터 오손 읽기가 일어나지 않음
+
+비반복적 읽기 => 같은 읽기임에도 이전과 다른 결과가 일어나는 것
+=> level 2부터 일어나지 않음
+
+유령데이터 => 같은 읽기임에도 이전엔 데이터 네개였는데 갑자기 5 되는거..
+=> level 3부터 안일어남
+
+공유 잠금 : read lock
+독점, 배타적 잠금 : write lock
