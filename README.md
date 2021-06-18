@@ -1,4 +1,4 @@
-# BOJ (Backjoon Online Judge )
+# BOJ (Backjoon Online Judge)
 
 ## 다양한 알고리즘
 백준, 파이썬, C, C++ 등의 다양한 알고리즘
