@@ -1,4 +1,4 @@
-# BOJ (Backjoon Online Judge)
+# Algorithm - CS
 > 1일 1알고리즘 백준, 프로그래머스 이용 [drag0npie](https://www.acmicpc.net/user/drag0npie)
 ---
 ## 기초 CS - txt
