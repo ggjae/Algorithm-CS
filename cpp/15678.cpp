@@ -1,27 +1,32 @@
-#include <bits/stdc++.h>
- 
+#include <iostream>
+#include <queue>
+#include <algorithm>
 using namespace std;
- 
-typedef long long ll;
-typedef pair<ll,int> pli;
- 
-ll n,d,a,now,ans=-1e9;
-deque<pli> deq;
- 
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
+    int n,d;
+    int dp[100000];
+    bool check[100000];
+    vector<int> ans;
     cin>>n>>d;
-    deq.push_back(pli(0,0));
-    for(int i=1;i<=n;i++)
-    {
-        cin>>a;
-        while(!deq.empty()&&deq.front().second+d<i) deq.pop_front();
-        now=max(a,a+deq.front().first);
-        ans=max(ans,now);
-        while(!deq.empty()&&deq.back().first<=now) deq.pop_back();
-        deq.push_back(pli(now,i));
+    for(int i=0;i<n;i++){
+        int tmp;
+        cin >> tmp;
+        ans.push_back(tmp);
+        check[i] = false;
     }
-    cout<<ans;
+    for(int i=0;i<n;i++){
+        dp[i] = ans[i];
+        for(int j=1;j<=d;j++){
+            if(i-j>=0 && check[i] == false){
+                dp[i] = max(dp[i], ans[i]+dp[i-j]);
+                if(dp[i] == ans[i]+dp[i-j]){
+                    check[i] = true;
+                }
+            }
+        }
+        
+    }
+    sort(dp,dp+n-1,greater<>());
+    cout << dp[0];
     return 0;
 }
