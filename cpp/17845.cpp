@@ -15,8 +15,8 @@ int main(){
             }
         }
     }
-    for(int i=0;i<=n;i++){
-        printf("dp[%d] = %d\n",i,dp[i]);
-    }
+    // for(int i=0;i<=n;i++){
+    //     printf("dp[%d] = %d\n",i,dp[i]);
+    // }
     return 0;
 }
