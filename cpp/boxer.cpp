@@ -1,6 +1,6 @@
 #include <string>
 #include <vector>
-
+#include <algorithm>
 using namespace std;
 typedef struct{
     int idx;
@@ -29,21 +29,23 @@ vector<int> solution(vector<int> weights, vector<string> head2head) {
     vector<int> answer;
     vector<Boxer> boxers;
     for (int i = 0; i < head2head.size(); i++) { 
-        int win = 0; 
+        int wins = 0; 
         float total = 0;
         int heavywin = 0; 
         for (int j = 0; j < head2head[i].length(); j++) { 
-            total++; 
+            
             if (head2head[i][j] == 'N') { 
                 continue; 
             }
             
             if (head2head[i][j] == 'W') { 
-                win++; 
+                wins++; 
+
                 if (weights[i] < weights[j]) {
                     heavywin++; 
                 }
-            } 
+            }
+            total++;  
         } 
         boxers.push_back({ i + 1, weights[i], total ? wins / total : 0, heavywin }); 
     }
