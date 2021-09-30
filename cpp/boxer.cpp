@@ -2,12 +2,15 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
+// 비교를 위한 Boxer의 구조체 생성
+
 typedef struct{
     int idx;
     int weight;
     float winrate;
     int heavywincount;
 } Boxer;
+
 bool cmp(Boxer a, Boxer b){
     if(a.winrate > b.winrate) return true;
     if(a.winrate == b.winrate){
